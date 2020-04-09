@@ -1,0 +1,19 @@
+= egf_config
+
+egf_config is a dynamic configuration files loader.
+
+== Goals
+
+*Dynamically* load configuration files *while it changes*.
+
+Reserved *extensible callback* function.
+
+== API
+
+    egf_config:load_file/1
+
+    egf_config:load_dir/1, egf_config:load_dir/2
+
+    egf_config:add_dir/1
+
+    egf_config:set_interval/1

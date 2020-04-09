@@ -1,0 +1,15 @@
+{application, egf_config,
+ [{description, "Configration handler for EGF."},
+  {vsn, "0.1.0"},
+  {registered, []},
+  {mod, {egf_config_app, []}},
+  {applications,
+   [kernel,
+    stdlib
+   ]},
+  {env,[]},
+  {modules, []},
+
+  {licenses, ["MIT"]},
+  {links, []}
+ ]}.
