@@ -88,7 +88,7 @@ init([]) ->
 load_file(AbsPath) ->
     case file:consult(AbsPath) of
         {ok, Configs} ->
-            handle_config(Configs);
+            handle_configs(Configs);
         {error, Reason} ->
             {error, Reason}
     end.
@@ -98,7 +98,7 @@ add_dir(AbsPath) ->
     gen_server:call(?MODULE, {add_dir, AbsPath}).
 
 -spec set_interval(Interval :: integer()) -> ok.
-set_interval(Interval) ->
+set_interval(Interval) when is_integer(Interval), Interval > 1000 ->
     gen_server:cast(?MODULE, {set_interval, Interval}).
 
 -spec set_suffix(Suffix :: string()) -> ok.
@@ -119,7 +119,7 @@ handle_call({add_dir, AbsPath}, _From, State = #state{path_list = OldPath}) ->
     
     case filelib:is_dir(AbsPath) of
         true ->
-            NewPath = [AbsPath | OldPath],
+            NewPath = lists:usort([AbsPath | OldPath]),
             NewState = State#state{path_list = NewPath},
             {reply, ok, NewState};
         false ->
@@ -152,8 +152,8 @@ handle_cast(_Request, State = #state{}) ->
     {noreply, NewState :: #state{}, timeout() | hibernate} |
     {stop, Reason :: term(), NewState :: #state{}}).
 handle_info(tick, State = #state{}) ->
+    check(State),
     NewState = tick(State),
-    check(NewState),
     {noreply, NewState};
 handle_info(_Info, State = #state{}) ->
     {noreply, State}.
@@ -180,6 +180,16 @@ code_change(_OldVsn, State = #state{}, _Extra) ->
 %%% Internal functions
 %%%===================================================================
 
+handle_configs([H|T]) ->
+    case handle_config(H) of
+        ok ->
+            handle_configs(T);
+        Error ->
+            Error
+    end;
+handle_configs([]) ->
+    ok.
+
 handle_config(Config) when is_tuple(Config) ->
     CallbackMod = element(1, Config),
     c:l(CallbackMod),
@@ -194,6 +204,7 @@ handle_config(Config) when is_tuple(Config) ->
                     {error, Type}
             end;
         false ->
+            ?LOG_ERROR("No such config handler, Config = ~p, ", [Config]),
             {error, no_such_handler}
     end.
 
@@ -234,4 +245,6 @@ check_load([Filename | T], DirPath) ->
             end
     end,
     
-    check_load(T, DirPath).
+    check_load(T, DirPath);
+check_load([], _DirPath) ->
+    ok.

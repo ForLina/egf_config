@@ -23,6 +23,7 @@
 -module(egf_config).
 
 -callback handle_config(Config :: tuple()) -> ok.
+-export([handle_config/1]).
 
 %% API
 -export([
@@ -32,6 +33,8 @@
       set_interval/1,
       set_suffix/1
 ]).
+
+-include("logger.hrl").
 
 %% @doc Sometimes we just need load a configuration file once when server
 %%      starts.
@@ -60,6 +63,17 @@ set_interval(Interval) ->
 -spec set_suffix(Suffix :: string()) -> ok.
 set_suffix(Suffix) ->
     egf_config_loader:set_suffix(Suffix).
+
+-spec handle_config(Config :: tuple()) -> ok.
+handle_config({?MODULE, TableName, TableOptions, Objects})
+    when is_atom(TableName),
+         is_list(TableOptions),
+         is_list(Objects) ->
+    catch ets:delete(TableName),
+    Table = ets:new(TableName, TableOptions),
+    ets:insert(Table, Objects),
+    ?LOG_NOTICE("Load table ~p~n", [TableName]),
+    ok.
 
 %%%==================================================================
 %%% Internal functions
