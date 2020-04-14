@@ -54,7 +54,14 @@ init([]) ->
                   type => worker,       % optional
                   modules => [egf_config_loader]},   % optional
     
-    ChildSpecs = [EgfConfig],
+    EgfTimer = #{id => egf_timer,       % mandatory
+                  start => {egf_timer, start_link, []},      % mandatory
+                  restart => permanent,   % optional
+                  shutdown => 2000, % optional
+                  type => worker,       % optional
+                  modules => [egf_timer]},   % optional
+    
+    ChildSpecs = [EgfConfig, EgfTimer],
     {ok, {SupFlags, ChildSpecs}}.
 
 %% internal functions
