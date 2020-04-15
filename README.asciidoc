@@ -2,6 +2,10 @@
 
 egf_config is a dynamic configuration files loader.
 
+Currently supports converting configuration files to ets table, generating event
+
+handlers through configuration, and generating timers through configuration
+
 == Goals
 
 *Dynamically* load configuration files *while it changes*.
@@ -17,3 +21,14 @@ Reserved *extensible callback* function.
     egf_config:add_dir/1
 
     egf_config:set_interval/1
+
+    egf_config:set_suffix/1
+
+== Best Practices
+Put the configuration files, event handlers, and timers in different directories,
+
+so that we can load a certain type of configuration file independently.
+
+Usually we load the configuration file first, then the event handler,
+
+and finally the timer.
