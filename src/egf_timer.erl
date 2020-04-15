@@ -23,6 +23,8 @@
 -module(egf_timer).
 
 -behaviour(gen_server).
+-behaviour(egf_config).
+
 
 %% API
 -export([start_link/0]).
@@ -67,7 +69,7 @@ handle_config({?MODULE, Key, {M, F, A} = MFA, Interval}) when
     is_atom(Key), is_atom(M), is_atom(F), is_list(A), is_integer(Interval) ->
     gen_server:cast(?MODULE, {add, Key, MFA, Interval}).
 
--spec remove_timer(Key) -> ok.
+-spec remove_timer(Key :: atom()) -> ok.
 remove_timer(Key) when is_atom(Key) ->
     gen_server:cast(?MODULE, {remove, Key}).
 
