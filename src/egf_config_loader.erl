@@ -98,7 +98,7 @@ add_dir(AbsPath) ->
     gen_server:call(?MODULE, {add_dir, AbsPath}).
 
 -spec set_interval(Interval :: integer()) -> ok.
-set_interval(Interval) when is_integer(Interval), Interval > 1000 ->
+set_interval(Interval) when is_integer(Interval), Interval >= 1000 ->
     gen_server:cast(?MODULE, {set_interval, Interval}).
 
 -spec set_suffix(Suffix :: string()) -> ok.
@@ -136,9 +136,11 @@ handle_call(_Request, _From, State = #state{}) ->
     {noreply, NewState :: #state{}, timeout() | hibernate} |
     {stop, Reason :: term(), NewState :: #state{}}).
 
-handle_cast({set_interval, Interval}, State = #state{})
+handle_cast({set_interval, Interval}, State = #state{ref = Ref})
     when is_integer(Interval), Interval >= 1000 ->
-    {noreply, State#state{interval = Interval}};
+    catch erlang:cancel_timer(Ref),
+    NewState =  State#state{interval = Interval},
+    {noreply, tick(NewState)};
 handle_cast({set_suffix, Suffix}, State = #state{})
     when is_list(Suffix) ->
     {noreply, State#state{suffix = Suffix}};
@@ -201,12 +203,14 @@ handle_config(Config) when is_tuple(Config) ->
                 Type:Error:Stacktrace ->
                     ?LOG_ERROR("Config = ~p, Type = ~p, Error = ~p, Stacktrace = ~p",
                                [Config, Type, Error, Stacktrace]),
-                    {error, Type}
+                    {error, Error}
             end;
         false ->
             ?LOG_ERROR("No such config handler, Config = ~p, ", [Config]),
             {error, no_such_handler}
-    end.
+    end;
+handle_config(_Any) ->
+    {error, bad_config}.
 
 tick(#state{interval = Interval, ref = Ref} = State) ->
     catch timer:cancel(Ref),

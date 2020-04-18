@@ -25,7 +25,6 @@
 -behaviour(gen_server).
 -behaviour(egf_config).
 
-
 %% API
 -export([start_link/0]).
 -export([handle_config/1]).
@@ -169,7 +168,6 @@ tick(#state{interval = Interval}) ->
 unixtime() ->
     {M, S, _} = os:timestamp(),
     M * 1000000 + S.
-
 
 check(TimeFun) ->
     Now = TimeFun(),
