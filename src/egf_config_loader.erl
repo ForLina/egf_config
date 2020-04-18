@@ -200,10 +200,10 @@ handle_config(Config) when is_tuple(Config) ->
             try
                 ok = apply(CallbackMod, handle_config, [Config])
             catch
-                Type:Error:Stacktrace ->
-                    ?LOG_ERROR("Config = ~p, Type = ~p, Error = ~p, Stacktrace = ~p",
-                               [Config, Type, Error, Stacktrace]),
-                    {error, Error}
+                Class:Reason:Stacktrace ->
+                    ?LOG_ERROR("Config = ~p, Class = ~p, Reason = ~p, Stacktrace = ~p",
+                               [Config, Class, Reason, Stacktrace]),
+                    {error, Reason}
             end;
         false ->
             ?LOG_ERROR("No such config handler, Config = ~p, ", [Config]),
