@@ -44,10 +44,10 @@
 -define(SUFFIX, "*.cfg").
 
 -record(state, {
-    interval = ?INTERVAL,
+    interval = ?INTERVAL :: integer(),
     ref :: reference(),
-    path_list = [],
-    suffix = ?SUFFIX
+    path_list = [] :: list(),
+    suffix = ?SUFFIX :: string()
 }).
 
 -define(CFG_INFO, cfg_info).

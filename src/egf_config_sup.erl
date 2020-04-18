@@ -30,6 +30,8 @@
 
 -define(SERVER, ?MODULE).
 
+-spec start_link() ->
+    supervisor:startlink_ret().
 start_link() ->
     supervisor:start_link({local, ?SERVER}, ?MODULE, []).
 
@@ -42,6 +44,9 @@ start_link() ->
 %%                  shutdown => shutdown(), % optional
 %%                  type => worker(),       % optional
 %%                  modules => modules()}   % optional
+
+-spec init([])
+          -> {ok, {map(), [supervisor:child_spec()]}}.
 init([]) ->
     SupFlags = #{strategy => one_for_all,
                  intensity => 0,
@@ -55,11 +60,11 @@ init([]) ->
                   modules => [egf_config_loader]},   % optional
     
     EgfTimer = #{id => egf_timer,       % mandatory
-                  start => {egf_timer, start_link, []},      % mandatory
-                  restart => permanent,   % optional
-                  shutdown => 2000, % optional
-                  type => worker,       % optional
-                  modules => [egf_timer]},   % optional
+                 start => {egf_timer, start_link, []},      % mandatory
+                 restart => permanent,   % optional
+                 shutdown => 2000, % optional
+                 type => worker,       % optional
+                 modules => [egf_timer]},   % optional
     
     ChildSpecs = [EgfConfig, EgfTimer],
     {ok, {SupFlags, ChildSpecs}}.

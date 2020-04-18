@@ -39,8 +39,8 @@
 
 -define(DEFAULT_INTERVAL, 1000).
 -record(state, {
-    interval = ?DEFAULT_INTERVAL,
-    time_fun = fun unixtime/0
+    interval = ?DEFAULT_INTERVAL :: integer(),
+    time_fun = fun unixtime/0 :: function()
 }).
 
 -record(scheduler, {
