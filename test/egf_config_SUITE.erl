@@ -52,7 +52,7 @@ load_file_test(_Config) ->
     Filename = filename:absname("test.cfg"),
     
     %% right config
-    ok = file:write_file(Filename, <<"{egf_config, test, [named_table, public, set], [
+    ok = file:write_file(Filename, <<"{egf_config, test,  [named_table], [
     {jack, 13},
     {lin, 12}]}.">>),
     
@@ -60,7 +60,7 @@ load_file_test(_Config) ->
     [{jack, 13}] = ets:lookup(test, jack),
     
     %% reload same file
-    ok = file:write_file(Filename, <<"{egf_config, test, [named_table, public, set], [
+    ok = file:write_file(Filename, <<"{egf_config, test,  [named_table], [
     {jack, 12},
     {lin, 14}]}.">>),
     
@@ -68,35 +68,35 @@ load_file_test(_Config) ->
     [{lin, 14}] = ets:lookup(test, lin),
     
     %% bad term
-    ok = file:write_file(Filename, <<"{egf_config, test, [named_table, public, set], [
+    ok = file:write_file(Filename, <<"{egf_config, test,  [named_table], [
     {jack, 12},
     {lin, 14]}.">>),
     
     {error, _} = egf_config:load_file(Filename),
     
     %% when config is not a tuple
-    ok = file:write_file(Filename, <<"[egf_config, test, [named_table, public, set], [
+    ok = file:write_file(Filename, <<"[egf_config, test,  [named_table], [
     {jack, 12},
     {lin, 14}]].">>),
     
     {error, bad_config} = egf_config:load_file(Filename),
     
     %% wrong handler
-    ok = file:write_file(Filename, <<"{egf_cfg, test, [named_table, public, set], [
+    ok = file:write_file(Filename, <<"{egf_cfg, test,  [named_table], [
     {jack, 13},
     {lin, 12}]}.">>),
     
     {error, no_such_handler} = egf_config:load_file(Filename),
     
     %% wrong arguments
-    ok = file:write_file(Filename, <<"{egf_config, test, [name_table, public, set], [
+    ok = file:write_file(Filename, <<"{egf_config, test, [name_table ], [
     {jack, 13},
     {lin, 12}]}.">>),
     
     {error, badarg} = egf_config:load_file(Filename),
     
     %% wrong tuple size
-    ok = file:write_file(Filename, <<"{egf_config, [name_table, public, set], [
+    ok = file:write_file(Filename, <<"{egf_config, [name_table ], [
     {jack, 13},
     {lin, 12}]}.">>),
     
@@ -106,7 +106,7 @@ load_dir1_test(_Config) ->
     AbsName = filename:absname("test.cfg"),
     DirName = filename:dirname(AbsName),
     {ok, FD} =  file:open(AbsName, [write]),
-    ok = file:write(FD,  <<"{egf_config, test, [named_table, public, set], [
+    ok = file:write(FD,  <<"{egf_config, test,  [named_table], [
     {jack, 11},
     {lin, 12}]}.">>),
     file:close(FD),
@@ -118,7 +118,7 @@ load_dir2_test(_Config) ->
     AbsName = filename:absname("test.config"),
     DirName = filename:dirname(AbsName),
     {ok, FD} =  file:open(AbsName, [write]),
-    ok = file:write(FD,  <<"{egf_config, test, [named_table, public, set], [
+    ok = file:write(FD,  <<"{egf_config, test,  [named_table], [
     {jack, 12},
     {lin, 12}]}.">>),
     file:close(FD),
@@ -132,7 +132,7 @@ add_dir_test(_Config) ->
     
     {ok, FD} =  file:open(AbsName, [write]),
     
-    ok = file:write(FD,  <<"{egf_config, test, [named_table, public, set], [
+    ok = file:write(FD,  <<"{egf_config, test,  [named_table], [
     {jack, 13},
     {lin, 12}]}.">>),
     
@@ -145,7 +145,7 @@ add_dir_test(_Config) ->
     [{jack, 13}] = ets:lookup(test, jack),
     
     %% Test auto reload file
-    ok = file:write_file(AbsName, <<"{egf_config, test, [named_table, public, set], [
+    ok = file:write_file(AbsName, <<"{egf_config, test,  [named_table], [
     {jack, 14},
     {lin, 12}]}.">>),
     
@@ -157,7 +157,7 @@ add_dir_test(_Config) ->
     %% if set interval works
     egf_config:set_interval(1000),
     
-    ok = file:write_file(AbsName, <<"{egf_config, test, [named_table, public, set], [
+    ok = file:write_file(AbsName, <<"{egf_config, test,  [named_table], [
     {jack, 15},
     {lin, 12}]}.">>),
     
@@ -172,7 +172,7 @@ add_dir_test(_Config) ->
     
     ConfigName = filename:join(DirName, "test.config"),
     
-    ok = file:write_file(ConfigName, <<"{egf_config, test, [named_table, public, set], [
+    ok = file:write_file(ConfigName, <<"{egf_config, test,  [named_table], [
     {jack, 16},
     {lin, 12}]}.">>),
     
