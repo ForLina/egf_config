@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2023-04-25T08:49:21.213Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36" etag="p-ZyoQBoWbPK5ch7gmfD" version="21.2.1" type="github">
+<mxfile host="app.diagrams.net" modified="2023-04-25T08:51:00.754Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36" etag="fUegc_2EMIN1eaw1glFI" version="21.2.1" type="github">
   <diagram name="第 1 页" id="mnbAo52HXt2Mq754c5h-">
     <mxGraphModel dx="2021" dy="677" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -109,10 +109,10 @@
         <mxCell id="40k8midxnQUzMX0EVWL1-6" value="" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="390" y="310" width="140" height="170" as="geometry" />
         </mxCell>
-        <mxCell id="40k8midxnQUzMX0EVWL1-7" value="virtualLife&lt;br&gt;游戏逻辑" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="40k8midxnQUzMX0EVWL1-7" value="game logic server" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="405" y="330" width="105" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="40k8midxnQUzMX0EVWL1-8" value="virtualLife&lt;br&gt;游戏逻辑" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="40k8midxnQUzMX0EVWL1-8" value="game logic server" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="405" y="410" width="105" height="40" as="geometry" />
         </mxCell>
         <mxCell id="40k8midxnQUzMX0EVWL1-9" value="Nacos cluster 3 nodes" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
@@ -166,22 +166,22 @@
         <mxCell id="40k8midxnQUzMX0EVWL1-21" value="RabbitMQ(aws servce)" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="750" y="532" width="120" height="105" as="geometry" />
         </mxCell>
-        <mxCell id="40k8midxnQUzMX0EVWL1-22" value="store&lt;br&gt;合约事件记录" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="40k8midxnQUzMX0EVWL1-22" value="smart contract event trace" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="575" y="310" width="120" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="40k8midxnQUzMX0EVWL1-23" value="game_dashboard&lt;br&gt;游戏后台" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="40k8midxnQUzMX0EVWL1-23" value="game dashboard" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="575" y="370" width="120" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="40k8midxnQUzMX0EVWL1-24" value="dcenter&lt;br&gt;邮件服务" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="40k8midxnQUzMX0EVWL1-24" value="game mail service" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="575" y="430" width="120" height="40" as="geometry" />
         </mxCell>
         <mxCell id="40k8midxnQUzMX0EVWL1-25" value="&lt;font color=&quot;#3bb4e8&quot;&gt;interal micro service cluster&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="370" y="150" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="40k8midxnQUzMX0EVWL1-26" value="&lt;font color=&quot;#3bb4e8&quot;&gt;中间件&lt;br&gt;Middleware&lt;br&gt;&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="40k8midxnQUzMX0EVWL1-26" value="&lt;font color=&quot;#3bb4e8&quot;&gt;Middleware&lt;br&gt;&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="-50" y="555" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="40k8midxnQUzMX0EVWL1-27" value="blockchain&lt;br&gt;币安智能链" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="40k8midxnQUzMX0EVWL1-27" value="blockchain&lt;br&gt;bsc" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="920" y="130" width="110" height="380" as="geometry" />
         </mxCell>
         <mxCell id="40k8midxnQUzMX0EVWL1-28" value="" style="shape=flexArrow;endArrow=classic;html=1;rounded=0;entryX=-0.041;entryY=0.528;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" target="40k8midxnQUzMX0EVWL1-27">
@@ -208,7 +208,7 @@
             <mxPoint x="50" y="284.94" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="40k8midxnQUzMX0EVWL1-33" value="pandora api&lt;br&gt;签名服务" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="40k8midxnQUzMX0EVWL1-33" value="signature service" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="575" y="230" width="125" height="50" as="geometry" />
         </mxCell>
         <mxCell id="40k8midxnQUzMX0EVWL1-34" value="" style="shape=flexArrow;endArrow=classic;html=1;rounded=0;entryX=-0.018;entryY=0.337;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" target="40k8midxnQUzMX0EVWL1-27">
